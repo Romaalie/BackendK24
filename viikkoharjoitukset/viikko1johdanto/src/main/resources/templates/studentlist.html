@@ -2,12 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Handling Lists</title>
+    <title>2. Handling Lists</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
-    <h1<>Hello</h1>
+    <h1>Welcome to Springboot for beginners!</h1>
+
+    <h2>Student List:</h2>
+    <table>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.firstName}"></td>
+            <td th:text="${student.lastName}"></td>
+        </tr>
+    </table>
 </body>
 
 </html>

@@ -2,7 +2,7 @@ package modelandview.domain;
 
 public class Student {
 
-    String firstName, lastName;
+    private String firstName, lastName;
 
     @Override
     public String toString() {
