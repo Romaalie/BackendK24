@@ -67,5 +67,24 @@ public class ModelandviewController {
         return "friendlist";
     }
 
-    
+    @GetMapping("/friendCombined")
+    public String showfriendCombined(Model modelFriendC) {
+        modelFriendC.addAttribute("friend", new Friend());
+        List<Friend> friendsC = new ArrayList<>();
+        friendsC.add(new Friend("Jukka", "Jekku"));
+        friendsC.add(new Friend("Matti", "Matikainen"));
+        friendsC.add(new Friend("Harald", "Gunnarsson"));
+
+        modelFriendC.addAttribute("friendsC", friendsC);
+
+        return "friendCombined";
+    }
+//Tehtävänannossa ei kerrottu onko ilman tietokantaa edes mahdollista saada lisäystä toimimaan. Tuntiesimerkissä ainakaan ei, eikä demossa.
+    @PostMapping("friendCombined")
+    public String addFriendCombined(Friend friend) {
+
+        return "friendCombined";
+    }
+
+
 }

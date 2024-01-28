@@ -7,8 +7,18 @@
 </head>
 
 <body>
-	<h1>Add new friend to list</h1>
-    <form action="#" th:action="@{/addFriend}" th:object="${friend}" method="post">
+    <h1>My friends</h1>
+
+    <h2>Name</h2>
+    <table>
+        <tr th:each="friend : ${friendsC}">
+            <td th:text="${friend.firstName}"></td>
+            <td th:text="${friend.lastName}"></td>
+        </tr>
+    </table>
+
+    <h1>Add new friend to list</h1>
+    <form action="#" th:action="@{/friendCombined}" th:object="${friend}" method="post">
     	<table>
     	<tr>
     		<td>First name: <input type="text" placeholder="First name" th:field="*{firstName}" /></td>
