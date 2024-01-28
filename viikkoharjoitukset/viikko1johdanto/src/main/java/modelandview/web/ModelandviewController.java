@@ -54,14 +54,18 @@ public class ModelandviewController {
         return "friendlist";
     }
 
-    @GetMapping("/addFriend")
-    public String showAddFriend (Model modelFriend) {
+    @GetMapping("addFriend")
+    public String showAddFriend(Model modelFriend) {
+        modelFriend.addAttribute("friend", new Friend());
         return "addFriend";
     }
 
-    @PostMapping("/addFriend")
-    public String postAddFriend(Model modelFriend) {
+    //Tehtävänannossa ei oikein ollut ohjetta mihin tämän pitäisi ohjata ja onko ilman tietokantaa edes mahdollista saada lisäystä toimimaan. Tuntiesimerkissä ainakaan ei, eikä demossa.
+    @PostMapping("addFriend")
+    public String addFriend(Friend friend) {
 
-        return "addFriend";
+        return "friendlist";
     }
+
+    
 }
