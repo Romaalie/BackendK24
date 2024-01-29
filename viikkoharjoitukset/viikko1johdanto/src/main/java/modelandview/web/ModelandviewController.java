@@ -18,6 +18,7 @@ import modelandview.domain.Student;
 public class ModelandviewController {
 
     List<Friend> friends = new ArrayList<>();
+    List<Friend> friendsC = new ArrayList<>();
 
     @RequestMapping("/hello")
     public String showHelloPage() {
@@ -63,7 +64,7 @@ public class ModelandviewController {
         return "addFriend";
     }
 
-    //Tehtävänannossa ei oikein ollut ohjetta mihin tämän pitäisi ohjata ja onko ilman tietokantaa edes mahdollista saada lisäystä toimimaan. Tuntiesimerkissä ainakaan ei, eikä demossa.
+    
     @PostMapping("addFriend")
     public String addFriend(@ModelAttribute Friend friend) {
         friends.add(friend);
@@ -75,21 +76,22 @@ public class ModelandviewController {
     @GetMapping("/friendCombined")
     public String showfriendCombined(Model modelFriendC) {
         modelFriendC.addAttribute("friend", new Friend());
-        List<Friend> friendsC = new ArrayList<>();
-        friendsC.add(new Friend("Jukka", "Jekku"));
-        friendsC.add(new Friend("Matti", "Matikainen"));
-        friendsC.add(new Friend("Harald", "Gunnarsson"));
+        //List<Friend> friendsC = new ArrayList<>();
+        //friendsC.add(new Friend("Jukka", "Jekku"));
+        //friendsC.add(new Friend("Matti", "Matikainen"));
+        //friendsC.add(new Friend("Harald", "Gunnarsson"));
+        System.out.println("Listan tuloste: " + friendsC);
 
         modelFriendC.addAttribute("friendsC", friendsC);
 
         return "friendCombined";
     }
-//Tehtävänannossa ei kerrottu onko ilman tietokantaa edes mahdollista saada lisäystä toimimaan. Tuntiesimerkissä ainakaan ei, eikä demossa.
 
     @PostMapping("friendCombined")
     public String addFriendCombined(Friend friend) {
-
-        return "friendCombined";
+        friendsC.add(friend);
+        System.out.println("Uusi ystävä: " + friend);
+        return "redirect:/friendCombined";
     }
 
 }
