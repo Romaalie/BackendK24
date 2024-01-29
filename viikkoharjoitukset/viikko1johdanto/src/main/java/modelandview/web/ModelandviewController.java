@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,8 @@ import modelandview.domain.Student;
 
 @Controller
 public class ModelandviewController {
+
+    List<Friend> friends = new ArrayList<>();
 
     @RequestMapping("/hello")
     public String showHelloPage() {
@@ -44,17 +47,17 @@ public class ModelandviewController {
     //@RequestMapping
     @GetMapping("/friendlist")
     public String showFriendList(Model modelFriend) {
-        List<Friend> friends = new ArrayList<>();
-        friends.add(new Friend("Marco", "Polo"));
-        friends.add(new Friend("George", "Harrison"));
-        friends.add(new Friend("Aleksis", "Kivi"));
+        //List<Friend> friends = new ArrayList<>();
+        //friends.add(new Friend("Marco", "Polo"));
+        //friends.add(new Friend("George", "Harrison"));
+        //friends.add(new Friend("Aleksis", "Kivi"));
+        System.out.println("Listan tuloste: " + friends);
 
         modelFriend.addAttribute("friends", friends);
-
         return "friendlist";
     }
 
-    @GetMapping("addFriend")
+    @GetMapping("/addFriend")
     public String showAddFriend(Model modelFriend) {
         modelFriend.addAttribute("friend", new Friend());
         return "addFriend";
@@ -62,9 +65,11 @@ public class ModelandviewController {
 
     //Tehtävänannossa ei oikein ollut ohjetta mihin tämän pitäisi ohjata ja onko ilman tietokantaa edes mahdollista saada lisäystä toimimaan. Tuntiesimerkissä ainakaan ei, eikä demossa.
     @PostMapping("addFriend")
-    public String addFriend(Friend friend) {
+    public String addFriend(@ModelAttribute Friend friend) {
+        friends.add(friend);
+        System.out.println("Uusi ystävä: " + friend);
 
-        return "friendlist";
+        return "redirect:/friendlist";
     }
 
     @GetMapping("/friendCombined")
@@ -80,11 +85,11 @@ public class ModelandviewController {
         return "friendCombined";
     }
 //Tehtävänannossa ei kerrottu onko ilman tietokantaa edes mahdollista saada lisäystä toimimaan. Tuntiesimerkissä ainakaan ei, eikä demossa.
+
     @PostMapping("friendCombined")
     public String addFriendCombined(Friend friend) {
 
         return "friendCombined";
     }
-
 
 }
